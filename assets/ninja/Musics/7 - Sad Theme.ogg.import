@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4pjav6g213h7"
+path="res://.godot/imported/7 - Sad Theme.ogg-1f519015e94efe326f3281420d12242b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/ninja/Musics/7 - Sad Theme.ogg"
+dest_files=["res://.godot/imported/7 - Sad Theme.ogg-1f519015e94efe326f3281420d12242b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
