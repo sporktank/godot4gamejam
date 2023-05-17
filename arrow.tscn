@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://brwj5m6ut8r0y"]
+
+[ext_resource type="Texture2D" uid="uid://civnv1tctgv6h" path="res://assets/ninja/Items/Weapons/Bow2/Arrow.png" id="1_ullrt"]
+[ext_resource type="Script" path="res://arrow.gd" id="2_rtux5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wa753"]
+size = Vector2(8, 8)
+
+[node name="Arrow" type="Sprite2D"]
+rotation = -1.5708
+texture = ExtResource("1_ullrt")
+script = ExtResource("2_rtux5")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_wa753")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

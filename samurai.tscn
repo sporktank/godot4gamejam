@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://dtylvi3afivhc"]
+[gd_scene load_steps=22 format=3 uid="uid://ty744g8shlur"]
 
+[ext_resource type="PackedScene" uid="uid://dje7f680w82yk" path="res://enemy.tscn" id="1_nmuig"]
 [ext_resource type="Script" path="res://samurai.gd" id="1_tkhtu"]
-[ext_resource type="Texture2D" uid="uid://jl4khcfucir5" path="res://assets/ninja/Actor/Characters/Shadow.png" id="2_mys1b"]
 [ext_resource type="Texture2D" uid="uid://drp5twr5eyghl" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Jump.png" id="3_rt5bu"]
 [ext_resource type="Texture2D" uid="uid://dgwfaecgaijh4" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Attack.png" id="4_idfw8"]
 [ext_resource type="Texture2D" uid="uid://dyyahaecridk7" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Idle.png" id="5_sfjxg"]
+[ext_resource type="Texture2D" uid="uid://c4m0loybqjwf3" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Dead.png" id="5_yfcvo"]
+[ext_resource type="Texture2D" uid="uid://vgw7fnu07bjy" path="res://assets/ninja/Items/Weapons/Sword2/Sprite.png" id="6_5g448"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tu1j"]
 atlas = ExtResource("3_rt5bu")
@@ -38,6 +40,10 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("4_idfw8")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8x8qn"]
+atlas = ExtResource("5_yfcvo")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_foh6l"]
 atlas = ExtResource("5_sfjxg")
 region = Rect2(0, 0, 16, 16)
@@ -54,7 +60,7 @@ region = Rect2(48, 0, 16, 16)
 atlas = ExtResource("5_sfjxg")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_l6r6f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_nsqwp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -74,7 +80,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v814r")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_left",
 "speed": 3.0
 }, {
@@ -85,7 +91,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_83hv5")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 3.0
 }, {
@@ -96,9 +102,17 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_coowf")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8x8qn")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -133,13 +147,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Samurai" type="Node2D"]
+[node name="Samurai" instance=ExtResource("1_nmuig")]
 script = ExtResource("1_tkhtu")
 
-[node name="Shadow" type="Sprite2D" parent="."]
-texture = ExtResource("2_mys1b")
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_nsqwp")
+frame_progress = 0.882707
+offset = Vector2(0, -8)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_l6r6f")
-animation = &"attack_down"
+[node name="PlayerDieOffset" parent="." index="2"]
+position = Vector2(5, -18)
+
+[node name="Sword" type="Sprite2D" parent="." index="3"]
+position = Vector2(5, -2)
+texture = ExtResource("6_5g448")
+offset = Vector2(0, -8)

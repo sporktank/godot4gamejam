@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://nyc6kq0fvhyj"]
+[gd_scene load_steps=2 format=3 uid="uid://nyc6kq0fvhyj"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ifthl"]
 
 [node name="Main" type="Node"]
+process_mode = 3
+script = ExtResource("1_ifthl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Overlay" type="ColorRect" parent="CanvasLayer"]
+offset_right = 320.0
+offset_bottom = 192.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvv0ape67pe4u"]
+
+[ext_resource type="PackedScene" uid="uid://bfl0ffmtmcm5v" path="res://connection.tscn" id="1_60tkq"]
+[ext_resource type="Script" path="res://door.gd" id="2_tdgie"]
+[ext_resource type="Texture2D" uid="uid://mgi08yymmqm4" path="res://assets/ninja/Backgrounds/Tilesets/TilesetDungeon.png" id="2_ur5ar"]
+
+[node name="Door" instance=ExtResource("1_60tkq")]
+script = ExtResource("2_tdgie")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="3"]
+position = Vector2(0, -4)
+texture = ExtResource("2_ur5ar")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)

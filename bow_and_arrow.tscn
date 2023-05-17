@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmikoaas7a7fm"]
+
+[ext_resource type="PackedScene" uid="uid://b08jcqdss0275" path="res://item.tscn" id="1_pfdhk"]
+[ext_resource type="Texture2D" uid="uid://civnv1tctgv6h" path="res://assets/ninja/Items/Weapons/Bow2/Arrow.png" id="2_kf6pp"]
+[ext_resource type="Script" path="res://bow_and_arrow.gd" id="2_sj85i"]
+[ext_resource type="Texture2D" uid="uid://tkrhl2dn00yp" path="res://assets/ninja/Items/Weapons/Bow2/Sprite.png" id="3_u7dnx"]
+
+[node name="BowAndArrow" instance=ExtResource("1_pfdhk")]
+script = ExtResource("2_sj85i")
+
+[node name="Sprite2D" parent="." index="1"]
+rotation = 0.0
+texture = ExtResource("3_u7dnx")
+
+[node name="Arrow" type="Sprite2D" parent="Sprite2D" index="0"]
+show_behind_parent = true
+position = Vector2(0, -3)
+rotation = -0.785398
+scale = Vector2(1, 1)
+texture = ExtResource("2_kf6pp")

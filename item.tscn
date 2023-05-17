@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b08jcqdss0275"]
+
+[ext_resource type="Script" path="res://item.gd" id="1_dwh6h"]
+[ext_resource type="Texture2D" uid="uid://jl4khcfucir5" path="res://assets/ninja/Actor/Characters/Shadow.png" id="2_ho8wq"]
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_dwh6h")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.75)
+texture = ExtResource("2_ho8wq")
+region_enabled = true
+region_rect = Rect2(2, 2, 8, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+rotation = 1.5708

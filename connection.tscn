@@ -1,23 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfl0ffmtmcm5v"]
+[gd_scene load_steps=4 format=3 uid="uid://bfl0ffmtmcm5v"]
 
-[ext_resource type="Texture2D" uid="uid://lekkbpj3fre2" path="res://icon.svg" id="1_6pjnm"]
 [ext_resource type="Script" path="res://connection.gd" id="1_nkjdd"]
+[ext_resource type="Texture2D" uid="uid://lulkvo42nmda" path="res://assets/edge.png" id="2_a54pa"]
+[ext_resource type="Texture2D" uid="uid://bs1mufi18keo7" path="res://assets/node.png" id="3_gd0d4"]
 
 [node name="Connection" type="Node2D"]
 script = ExtResource("1_nkjdd")
 
 [node name="Join" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_6pjnm")
-region_enabled = true
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_a54pa")
 region_rect = Rect2(0, 62, 128, 4)
 
 [node name="A" type="Sprite2D" parent="."]
 position = Vector2(-16, 0)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_6pjnm")
+texture = ExtResource("3_gd0d4")
 
 [node name="B" type="Sprite2D" parent="."]
 position = Vector2(16, 0)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_6pjnm")
+texture = ExtResource("3_gd0d4")

@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://xwwg24bmp0he"]
+
+[ext_resource type="Texture2D" uid="uid://jl4khcfucir5" path="res://assets/ninja/Actor/Characters/Shadow.png" id="1_iyshw"]
+[ext_resource type="Script" path="res://potion_explosion.gd" id="1_y4ut6"]
+[ext_resource type="Texture2D" uid="uid://sn4n2pf8a5ls" path="res://assets/ninja/Items/Potion/WaterPot.png" id="2_oho6v"]
+[ext_resource type="Texture2D" uid="uid://jusab07nctai" path="res://assets/ninja/FX/Magic/Circle/SpriteSheetWhite.png" id="3_huljw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74kwy"]
+atlas = ExtResource("3_huljw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg7cy"]
+atlas = ExtResource("3_huljw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65i8y"]
+atlas = ExtResource("3_huljw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvp2a"]
+atlas = ExtResource("3_huljw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_myn8o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74kwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg7cy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65i8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvp2a")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="PotionExplosion" type="Node2D"]
+script = ExtResource("1_y4ut6")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.75)
+texture = ExtResource("1_iyshw")
+region_enabled = true
+region_rect = Rect2(2, 2, 8, 2)
+
+[node name="Potion" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_oho6v")
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_myn8o")
+frame = 3
+frame_progress = 1.0
