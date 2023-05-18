@@ -21,11 +21,13 @@ func throw_and_explode() -> void:
 	var tween := create_tween()
 	tween.tween_property(potion, "position:y", -16.0, half_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(potion, "position:y", 0.0, half_duration).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	$ThrowSound.play()
 	await tween.finished
 	
 	potion.hide()
 	explosion.show()
 	explosion.play("default")
+	$ExplosionSound.play()
 	await explosion.animation_finished
 	
 	Global.potion_exploded.emit(get_map_position())

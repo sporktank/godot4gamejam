@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bbj8x6up5qx4r"]
+[gd_scene load_steps=39 format=3 uid="uid://bbj8x6up5qx4r"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_0dwoh"]
 [ext_resource type="Texture2D" uid="uid://jl4khcfucir5" path="res://assets/ninja/Actor/Characters/Shadow.png" id="2_p8ipd"]
@@ -7,8 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cpqu7ccbmfnt1" path="res://assets/ninja/Actor/Characters/DarkNinja/SeparateAnim/Walk.png" id="4_l6pgq"]
 [ext_resource type="Texture2D" uid="uid://c48lt3ros68hm" path="res://assets/ninja/Actor/Characters/DarkNinja/SeparateAnim/Special2.png" id="6_8ykgi"]
 [ext_resource type="Texture2D" uid="uid://m527deom1b3q" path="res://assets/ninja/Items/Weapons/Katana/SpriteInHand.png" id="7_pxbjo"]
+[ext_resource type="Texture2D" uid="uid://dtdvs2pi4h8sr" path="res://assets/move_hint.png" id="8_0op0t"]
 [ext_resource type="Texture2D" uid="uid://civnv1tctgv6h" path="res://assets/ninja/Items/Weapons/Bow2/Arrow.png" id="8_gqy1o"]
 [ext_resource type="Texture2D" uid="uid://sn4n2pf8a5ls" path="res://assets/ninja/Items/Potion/WaterPot.png" id="9_xo0ip"]
+[ext_resource type="AudioStream" uid="uid://gw6msd13nogk" path="res://assets/ninja/Sounds/Game/Success3.wav" id="10_q5n0g"]
+[ext_resource type="AudioStream" uid="uid://ccfb7wi7cexq5" path="res://assets/ninja/Sounds/Game/Sword2.wav" id="11_oykc1"]
+[ext_resource type="AudioStream" uid="uid://b1ceqbc8e8odn" path="res://assets/ninja/Sounds/Game/Hit.wav" id="12_icwh8"]
+[ext_resource type="AudioStream" uid="uid://ibiuv8q7ikft" path="res://assets/ninja/Sounds/Game/Jump.wav" id="13_7o6wt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0b5m"]
 atlas = ExtResource("3_7c0pk")
@@ -218,7 +223,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_etfhu"]
-size = Vector2(8, 8)
+size = Vector2(12, 12)
 
 [node name="Player" type="Node2D"]
 y_sort_enabled = true
@@ -242,9 +247,30 @@ texture = ExtResource("7_pxbjo")
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_etfhu")
 
 [node name="MoveHints" type="Node2D" parent="."]
+position = Vector2(0, -3)
+
+[node name="up" type="Sprite2D" parent="MoveHints"]
+position = Vector2(0, -8)
+rotation = -1.5708
+texture = ExtResource("8_0op0t")
+
+[node name="down" type="Sprite2D" parent="MoveHints"]
+position = Vector2(0, 9)
+rotation = 1.5708
+texture = ExtResource("8_0op0t")
+
+[node name="left" type="Sprite2D" parent="MoveHints"]
+position = Vector2(-8, 0)
+rotation = 3.14159
+texture = ExtResource("8_0op0t")
+
+[node name="right" type="Sprite2D" parent="MoveHints"]
+position = Vector2(8, 0)
+texture = ExtResource("8_0op0t")
 
 [node name="ArrowHints" type="Node2D" parent="."]
 visible = false
@@ -271,7 +297,6 @@ texture = ExtResource("8_gqy1o")
 
 [node name="PotionHints" type="Node2D" parent="."]
 visible = false
-y_sort_enabled = true
 
 [node name="up" type="Sprite2D" parent="PotionHints"]
 position = Vector2(0, -18)
@@ -288,5 +313,26 @@ texture = ExtResource("9_xo0ip")
 [node name="right" type="Sprite2D" parent="PotionHints"]
 position = Vector2(16, -5)
 texture = ExtResource("9_xo0ip")
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Win" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("10_q5n0g")
+bus = &"sound"
+
+[node name="Die" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("11_oykc1")
+bus = &"sound"
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("12_icwh8")
+bus = &"sound"
+
+[node name="Move" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("13_7o6wt")
+volume_db = -25.0
+pitch_scale = 0.9
+attenuation = 4.0
+bus = &"sound"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

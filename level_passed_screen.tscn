@@ -1,8 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bm4b4ym7jb7qw"]
+[gd_scene load_steps=15 format=3 uid="uid://bm4b4ym7jb7qw"]
 
 [ext_resource type="Script" path="res://level_passed_screen.gd" id="1_euf83"]
 [ext_resource type="Texture2D" uid="uid://dx047h4hxgxbs" path="res://assets/ninja/HUD/NinePathRect/DialogueBubble.png" id="2_up1lv"]
 [ext_resource type="FontFile" uid="uid://catldy6ebh5mn" path="res://assets/ninja/HUD/Font/NormalFont.ttf" id="3_1ch58"]
+[ext_resource type="AudioStream" uid="uid://dx8ymc8otqyv6" path="res://assets/ninja/Sounds/Menu/Menu2.wav" id="4_qd1bq"]
+[ext_resource type="AudioStream" uid="uid://cioxl28q86chx" path="res://assets/ninja/Sounds/Menu/Menu1.wav" id="5_7ud6t"]
+[ext_resource type="AudioStream" uid="uid://dwjn4mp7vhj2d" path="res://assets/ninja/Sounds/Game/Gold3.wav" id="6_ytd6k"]
+[ext_resource type="AudioStream" uid="uid://cwdnpdo2lo2fr" path="res://assets/ninja/Sounds/Game/Gold2.wav" id="7_khuk7"]
+[ext_resource type="AudioStream" uid="uid://b55hcc1j0h658" path="res://assets/ninja/Sounds/Game/Gold1.wav" id="8_m4c57"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujwua"]
 content_margin_left = 4.0
@@ -165,3 +170,28 @@ position = Vector2(104, -152)
 
 [node name="End" type="Marker2D" parent="."]
 position = Vector2(104, 24)
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qd1bq")
+bus = &"sound"
+
+[node name="Focus" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7ud6t")
+volume_db = -15.0
+bus = &"sound"
+
+[node name="Appear1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ytd6k")
+bus = &"sound"
+
+[node name="Appear2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_khuk7")
+bus = &"sound"
+
+[node name="Appear3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_m4c57")
+bus = &"sound"
+
+[connection signal="button_down" from="NinePatchRect/ContinueButton" to="." method="_on_continue_button_button_down"]
+[connection signal="focus_entered" from="NinePatchRect/ContinueButton" to="." method="_on_continue_button_focus_entered"]
+[connection signal="mouse_entered" from="NinePatchRect/ContinueButton" to="." method="_on_continue_button_mouse_entered"]

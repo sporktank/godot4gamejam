@@ -137,6 +137,17 @@ func has_connection(from: Vector2i, direction: Vector2i) -> bool:
 	return game_nodes[from].has_connection(direction)
 
 
+func get_connection(from: Vector2i, direction: Vector2i) -> Connection:
+	var destination := from + direction
+	var key := Vector4i(
+		from.x,
+		from.y,
+		destination.x,
+		destination.y
+	)
+	return connections_map[key] as Connection
+
+
 # HACKY: Is there a better way to do this?
 signal _all_enemy_movement_finished
 var _expected_move_enemies := 0

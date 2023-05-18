@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://tstnjlcj1ntg"]
+[gd_scene load_steps=33 format=3 uid="uid://tstnjlcj1ntg"]
 
 [ext_resource type="PackedScene" uid="uid://dje7f680w82yk" path="res://enemy.tscn" id="1_x80a8"]
 [ext_resource type="Texture2D" uid="uid://drp5twr5eyghl" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Jump.png" id="2_ogi5d"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dgwfaecgaijh4" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Attack.png" id="3_dgiws"]
 [ext_resource type="Texture2D" uid="uid://dqk7w50i7ptp2" path="res://assets/ninja/Actor/Characters/GoldKnight/SeparateAnim/Idle.png" id="4_dajok"]
 [ext_resource type="Texture2D" uid="uid://b2hj345akenn8" path="res://assets/ninja/Items/Weapons/Lance2/SpriteInHand.png" id="5_g7upd"]
+[ext_resource type="AudioStream" uid="uid://bfgovv2d8xhg1" path="res://assets/ninja/Sounds/Game/Hit6.wav" id="7_883w4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tu1j"]
 atlas = ExtResource("2_ogi5d")
@@ -243,7 +244,7 @@ script = ExtResource("2_wxgm0")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_wtua7")
-frame_progress = 0.498472
+frame_progress = 0.470432
 
 [node name="Weapon" type="Sprite2D" parent="AnimatedSprite2D" index="0"]
 show_behind_parent = true
@@ -253,3 +254,9 @@ texture = ExtResource("5_g7upd")
 
 [node name="PlayerDieOffset" parent="." index="2"]
 position = Vector2(4, -24)
+
+[node name="Move" type="AudioStreamPlayer2D" parent="." index="6"]
+stream = ExtResource("7_883w4")
+volume_db = -20.0
+attenuation = 4.0
+bus = &"sound"

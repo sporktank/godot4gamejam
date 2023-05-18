@@ -34,6 +34,7 @@ func move(level: Level) -> void:
 		star.position = Vector2i.ZERO
 		star.rotation = 0.0
 		star.show() # TODO: Animation.
+		$Appear.play()
 		await get_tree().create_timer(SMALL_PAUSE_TIME).timeout
 	
 	else:
@@ -46,17 +47,20 @@ func throw_star() -> void:
 	hit_box.monitorable = false
 	hit_box.monitoring = false
 	throwing = true
+	$Throw.play()
 
 
 func _process(delta: float) -> void:
 	if throwing:
 		star.rotation += 4 * TAU * delta
-		star.position += attack_direction * 256.0 * delta
-		hit_box.monitorable = star.position.length() > 32  # Throw away from self before attacking anything.
-		hit_box.monitoring = star.position.length() > 32  # Throw away from self before attacking anything.
+		star.position += attack_direction * 320.0 * delta
+		hit_box.monitorable = not Rect2i(-16, -16, 32, 48).has_point(star.position)  # Throw away from self before attacking anything.
+		hit_box.monitoring = not Rect2i(-16, -16, 32, 48).has_point(star.position)  # Throw away from self before attacking anything.
 		
 		if not Rect2i(-20, -20, 340, 240).has_point(star.global_position):
 			throwing = false
+			hit_box.monitorable = false
+			hit_box.monitoring = false
 			star.hide()
 			star_throw_finished.emit()
 
@@ -64,6 +68,8 @@ func _process(delta: float) -> void:
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	throwing = false
 	star_throw_finished.emit()
+	
 	if not area.get_parent() is Player:
+		$Attack.play()
 		star.hide()
 		star.position = Vector2i.ZERO

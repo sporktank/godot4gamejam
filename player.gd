@@ -24,6 +24,11 @@ var potion_explosion: PotionExplosion = null
 @onready var sword: Sprite2D = $Sword
 @onready var arrow_hints: Node2D = $ArrowHints
 @onready var potion_hints: Node2D = $PotionHints
+@onready var move_hints: Node2D = $MoveHints
+@onready var move_hints_up: Sprite2D = $MoveHints/up
+@onready var move_hints_down: Sprite2D = $MoveHints/down
+@onready var move_hints_left: Sprite2D = $MoveHints/left
+@onready var move_hints_right: Sprite2D = $MoveHints/right
 
 
 func _ready() -> void:
@@ -41,12 +46,16 @@ func move(direction: Vector2i, movement_type: Global.MovementType = Global.Movem
 	var dir_str := Global.direction_to_string(direction)
 	animated_sprite_2d.play("walk_" + dir_str)
 	
+	$Audio/Move.pitch_scale = randf_range(0.87, 0.92)
+	$Audio/Move.play()
+	
 	# TODO: Attack animation.
 	await create_tween().tween_property(
 		self, "position", position + direction * Global.TILE_SIZE_F, MOVE_DURATION
 		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).finished
 	
 	if movement_type == Global.MovementType.ATTACK:
+		$Audio/Attack.play()
 		attacked_position.emit(get_map_position())
 	
 	animated_sprite_2d.play("idle_" + dir_str)
@@ -59,6 +68,7 @@ func die(offset: Vector2) -> void:
 	shadow.hide()
 	sword.hide()
 	animated_sprite_2d.play("dead")
+	$Audio/Die.play()
 	create_tween().tween_property(animated_sprite_2d, "position", offset + Vector2(0, -2), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	create_tween().tween_property(self, "position:y", position.y + 2, 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	# TODO: Particle effects.
@@ -67,6 +77,7 @@ func die(offset: Vector2) -> void:
 func win() -> void:
 	can_move = false
 	animated_sprite_2d.play("win")
+	$Audio/Win.play()
 	# TODO: Particle effects?
 	
 	await animated_sprite_2d.animation_finished
@@ -104,6 +115,8 @@ func equip_sword() -> void:
 
 
 func _process(_delta: float) -> void:
+	#move_hints.scale = Vector2.ONE * (1.15 + 0.15 * sin(Time.get_ticks_msec() / 1000.0 * TAU))
+	
 	if holding_bow_and_arrow:
 		arrow_hints.scale = Vector2.ONE * (1.1 + 0.1 * sin(Time.get_ticks_msec() / 1000.0 * TAU))
 		
@@ -130,6 +143,13 @@ func _process(_delta: float) -> void:
 				throw_potion(Vector2i.LEFT)
 			elif Input.is_action_just_pressed("right"):
 				throw_potion(Vector2i.RIGHT)
+
+
+func show_move_hints(up: bool, down: bool, left: bool, right: bool) -> void:
+	move_hints_up.visible = up
+	move_hints_down.visible = down
+	move_hints_left.visible = left
+	move_hints_right.visible = right
 
 
 func shoot_arrow(direction: Vector2i) -> void:

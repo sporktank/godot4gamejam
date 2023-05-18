@@ -24,6 +24,7 @@ func move(level: Level) -> void:
 			var opp_dir_str := Global.direction_to_string(-direction)
 			
 			animated_sprite_2d.play("turn_from_%s_to_%s" % [dir_str, opp_dir_str])
+			$Move.play()
 			await animated_sprite_2d.animation_finished
 			direction *= -1
 	

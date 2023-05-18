@@ -24,6 +24,13 @@ func load_level(level_name: String) -> void:
 
 func _process(_delta: float) -> void:
 	if waiting_for_player_to_move:
+		player.show_move_hints(
+			level.can_player_move(Vector2i.UP * 2) != Global.MovementType.INVALID,
+			level.can_player_move(Vector2i.DOWN * 2) != Global.MovementType.INVALID,
+			level.can_player_move(Vector2i.LEFT * 2) != Global.MovementType.INVALID,
+			level.can_player_move(Vector2i.RIGHT * 2) != Global.MovementType.INVALID
+		)
+		
 		# TODO: This need cleaning up!
 		if (Input.is_action_pressed("up") or queued_input == Vector2i.UP) and level.can_player_move(Vector2i.UP * 2) != Global.MovementType.INVALID:
 			player.move(Vector2i.UP * 2, level.can_player_move(Vector2i.UP * 2))
@@ -46,6 +53,8 @@ func _process(_delta: float) -> void:
 			queued_input = Vector2i.ZERO
 	
 	else:
+		player.show_move_hints(false, false, false, false)
+		
 		if not player.is_waiting_to_interact_with_item():
 			if Input.is_action_just_pressed("up"):
 				queued_input = Vector2i.UP

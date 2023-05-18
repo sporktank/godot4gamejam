@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dgwfaecgaijh4" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Attack.png" id="4_fvswn"]
 [ext_resource type="Texture2D" uid="uid://dyyahaecridk7" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Idle.png" id="5_1jw8c"]
 [ext_resource type="Texture2D" uid="uid://gqd0ms4oh48f" path="res://assets/ninja/HUD/Dialog/DialogInfo.png" id="6_1n7s4"]
+[ext_resource type="AudioStream" uid="uid://cxkhtig2qpjvw" path="res://assets/ninja/Sounds/Game/Alert2.wav" id="7_m75w1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tu1j"]
 atlas = ExtResource("3_j05tw")
@@ -141,10 +142,6 @@ size = Vector2(8, 8)
 atlas = ExtResource("6_1n7s4")
 region = Rect2(0, 0, 20, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kypl"]
-atlas = ExtResource("6_1n7s4")
-region = Rect2(20, 0, 20, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_hyf1o"]
 atlas = ExtResource("6_1n7s4")
 region = Rect2(60, 0, 20, 16)
@@ -156,17 +153,17 @@ animations = [{
 "texture": SubResource("AtlasTexture_c62kt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6kypl")
+"texture": SubResource("AtlasTexture_hyf1o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6kypl")
+"texture": SubResource("AtlasTexture_c62kt")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hyf1o")
 }],
 "loop": false,
 "name": &"default",
-"speed": 3.0
+"speed": 4.0
 }]
 
 [node name="Enemy" type="Node2D"]
@@ -179,7 +176,7 @@ texture = ExtResource("2_nws6r")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_l6r6f")
 animation = &"idle_up"
-frame_progress = 0.370856
+frame_progress = 0.410645
 
 [node name="PlayerDieOffset" type="Marker2D" parent="."]
 
@@ -194,8 +191,11 @@ shape = SubResource("RectangleShape2D_2juua")
 visible = false
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_u6l4u")
-frame = 3
 frame_progress = 1.0
 offset = Vector2(0, -24)
+
+[node name="ReactionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_m75w1")
+bus = &"sound"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cem3inwifp18y"]
+[gd_scene load_steps=14 format=3 uid="uid://cem3inwifp18y"]
 
 [ext_resource type="Texture2D" uid="uid://cpatjukh36vqh" path="res://assets/ninja/Backgrounds/Tilesets/TilesetFloor.png" id="1_d6fr2"]
 [ext_resource type="Script" path="res://menu.gd" id="1_ddjc4"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://6f22u5jeqdq3" path="res://assets/ninja/Backgrounds/Tilesets/TilesetNature.png" id="3_6yhqn"]
 [ext_resource type="Texture2D" uid="uid://chj74hh87ujfi" path="res://assets/ninja/Backgrounds/Tilesets/TilesetNature-TreeOnly.png" id="5_i8gc5"]
 [ext_resource type="PackedScene" uid="uid://drwqcwym65t13" path="res://level_button.tscn" id="6_1ktjy"]
+[ext_resource type="Texture2D" uid="uid://b13ul22nq1uro" path="res://assets/ninja/Backgrounds/Tilesets/TilesetHouse-HouseOnly.png" id="7_m7hu3"]
+[ext_resource type="Texture2D" uid="uid://5l8f6al4n4it" path="res://assets/ninja/Backgrounds/Tilesets/StatueOnly.png" id="8_u5s28"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2x8xq"]
 texture = ExtResource("1_d6fr2")
@@ -2039,7 +2041,7 @@ offset_left = 16.0
 offset_top = 88.0
 offset_right = 48.0
 offset_bottom = 120.0
-texture = ExtResource("5_i8gc5")
+texture = ExtResource("7_m7hu3")
 
 [node name="TextureRect3" type="TextureRect" parent="."]
 layout_mode = 0
@@ -2047,7 +2049,7 @@ offset_left = 16.0
 offset_top = 128.0
 offset_right = 48.0
 offset_bottom = 160.0
-texture = ExtResource("5_i8gc5")
+texture = ExtResource("8_u5s28")
 
 [node name="Woods" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -2057,21 +2059,25 @@ offset_right = 304.0
 offset_bottom = 80.0
 theme_override_constants/separation = 8
 
-[node name="Woods1" parent="Woods" instance=ExtResource("6_1ktjy")]
+[node name="woods_1" parent="Woods" instance=ExtResource("6_1ktjy")]
 layout_mode = 2
-text = "ICHI"
+text = "ICHI
+1"
 
-[node name="Woods2" parent="Woods" instance=ExtResource("6_1ktjy")]
+[node name="woods_2" parent="Woods" instance=ExtResource("6_1ktjy")]
 layout_mode = 2
-text = "NI"
+text = "NI
+2"
 
-[node name="Woods3" parent="Woods" instance=ExtResource("6_1ktjy")]
+[node name="woods_3" parent="Woods" instance=ExtResource("6_1ktjy")]
 layout_mode = 2
-text = "SAN "
+text = " SAN
+3"
 
-[node name="Woods4" parent="Woods" instance=ExtResource("6_1ktjy")]
+[node name="woods_4" parent="Woods" instance=ExtResource("6_1ktjy")]
 layout_mode = 2
-text = "YON "
+text = " YON
+4"
 
 [node name="Town" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -2081,21 +2087,45 @@ offset_right = 304.0
 offset_bottom = 120.0
 theme_override_constants/separation = 8
 
-[node name="Town1" parent="Town" instance=ExtResource("6_1ktjy")]
+[node name="town_1" parent="Town" instance=ExtResource("6_1ktjy")]
 layout_mode = 2
-disabled = true
-text = "GO"
+text = "GO
+5"
+
+[node name="town_2" parent="Town" instance=ExtResource("6_1ktjy")]
+layout_mode = 2
+text = "ROKU
+6"
+
+[node name="town_3" parent="Town" instance=ExtResource("6_1ktjy")]
+layout_mode = 2
+text = "NANA
+7"
+
+[node name="Dungeon" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 128.0
+offset_right = 304.0
+offset_bottom = 160.0
+theme_override_constants/separation = 8
+
+[node name="dungeon_1" parent="Dungeon" instance=ExtResource("6_1ktjy")]
+layout_mode = 2
+text = " HACHI
+8"
+
+[node name="dungeon_2" parent="Dungeon" instance=ExtResource("6_1ktjy")]
+layout_mode = 2
+text = " KYU
+9"
+
+[node name="dungeon_3" parent="Dungeon" instance=ExtResource("6_1ktjy")]
+layout_mode = 2
+text = "JU
+10"
 
 [node name="SoundButton" parent="." instance=ExtResource("6_1ktjy")]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 0
-offset_left = 88.0
-offset_top = 174.0
-offset_right = 168.0
-offset_bottom = 194.0
-text = "MUSIC: HIGH"
-
-[node name="MusicButton" parent="." instance=ExtResource("6_1ktjy")]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 0
 offset_left = 16.0
@@ -2103,6 +2133,15 @@ offset_top = 174.0
 offset_right = 80.0
 offset_bottom = 194.0
 text = "SFX: HIGH "
+
+[node name="MusicButton" parent="." instance=ExtResource("6_1ktjy")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_left = 88.0
+offset_top = 174.0
+offset_right = 168.0
+offset_bottom = 194.0
+text = "MUSIC: HIGH"
 
 [node name="FullscreenButton" parent="." instance=ExtResource("6_1ktjy")]
 custom_minimum_size = Vector2(16, 16)
@@ -2122,9 +2161,17 @@ offset_right = 304.0
 offset_bottom = 194.0
 text = "EXIT"
 
-[connection signal="pressed" from="Woods/Woods1" to="." method="_on_woods_1_pressed"]
-[connection signal="pressed" from="Woods/Woods2" to="." method="_on_woods_2_pressed"]
-[connection signal="pressed" from="Woods/Woods3" to="." method="_on_woods_3_pressed"]
-[connection signal="pressed" from="Woods/Woods4" to="." method="_on_woods_4_pressed"]
+[connection signal="pressed" from="Woods/woods_1" to="." method="_on_woods_1_pressed"]
+[connection signal="pressed" from="Woods/woods_2" to="." method="_on_woods_2_pressed"]
+[connection signal="pressed" from="Woods/woods_3" to="." method="_on_woods_3_pressed"]
+[connection signal="pressed" from="Woods/woods_4" to="." method="_on_woods_4_pressed"]
+[connection signal="pressed" from="Town/town_1" to="." method="_on_town_1_pressed"]
+[connection signal="pressed" from="Town/town_2" to="." method="_on_town_2_pressed"]
+[connection signal="pressed" from="Town/town_3" to="." method="_on_town_3_pressed"]
+[connection signal="pressed" from="Dungeon/dungeon_1" to="." method="_on_dungeon_1_pressed"]
+[connection signal="pressed" from="Dungeon/dungeon_2" to="." method="_on_dungeon_2_pressed"]
+[connection signal="pressed" from="Dungeon/dungeon_3" to="." method="_on_dungeon_3_pressed"]
+[connection signal="pressed" from="SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="MusicButton" to="." method="_on_music_button_pressed"]
 [connection signal="pressed" from="FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

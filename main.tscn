@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://nyc6kq0fvhyj"]
+[gd_scene load_steps=6 format=3 uid="uid://nyc6kq0fvhyj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ifthl"]
+[ext_resource type="AudioStream" uid="uid://lv25bn14ocru" path="res://assets/ninja/Musics/5 - Peaceful.ogg" id="2_q43ma"]
+[ext_resource type="AudioStream" uid="uid://c84jupyekbhjr" path="res://assets/ninja/Musics/16 - Melancholia.ogg" id="3_huq2m"]
+[ext_resource type="AudioStream" uid="uid://cclwjy1afe0kr" path="res://assets/ninja/Musics/23 - Road.ogg" id="4_nw5cq"]
+[ext_resource type="AudioStream" uid="uid://bigwp75u5iwkw" path="res://assets/ninja/Musics/10 - Dark Castle.ogg" id="5_5dfhl"]
 
 [node name="Main" type="Node"]
 process_mode = 3
@@ -14,3 +18,21 @@ offset_right = 320.0
 offset_bottom = 192.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Menu" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("2_q43ma")
+bus = &"music"
+
+[node name="Woods" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_huq2m")
+bus = &"music"
+
+[node name="Town" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_nw5cq")
+bus = &"music"
+
+[node name="Dungeon" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("5_5dfhl")
+bus = &"music"

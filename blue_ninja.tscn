@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bdip164cp4jrc"]
+[gd_scene load_steps=24 format=3 uid="uid://bdip164cp4jrc"]
 
 [ext_resource type="PackedScene" uid="uid://dje7f680w82yk" path="res://enemy.tscn" id="1_3octw"]
 [ext_resource type="Script" path="res://blue_ninja.gd" id="2_be34f"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dgwfaecgaijh4" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Attack.png" id="3_1j5qy"]
 [ext_resource type="Texture2D" uid="uid://dt3whfk5noyfa" path="res://assets/ninja/Actor/Characters/BlueNinja/SeparateAnim/Idle.png" id="4_glmke"]
 [ext_resource type="Texture2D" uid="uid://b55ol26gl07qs" path="res://assets/ninja/HUD/Shuriken.png" id="6_3i8es"]
+[ext_resource type="AudioStream" uid="uid://bfgovv2d8xhg1" path="res://assets/ninja/Sounds/Game/Hit6.wav" id="7_xt5fa"]
+[ext_resource type="AudioStream" uid="uid://bttx0ilnlk5hw" path="res://assets/ninja/Sounds/Game/Sword.wav" id="8_w0aei"]
+[ext_resource type="AudioStream" uid="uid://b1ceqbc8e8odn" path="res://assets/ninja/Sounds/Game/Hit.wav" id="9_303qo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tu1j"]
 atlas = ExtResource("2_v4w7i")
@@ -134,8 +137,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6s22m"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_l5s2m"]
+radius = 9.0
 
 [node name="BlueNinja" instance=ExtResource("1_3octw")]
 script = ExtResource("2_be34f")
@@ -145,7 +148,7 @@ sprite_frames = SubResource("SpriteFrames_aj4vd")
 frame_progress = 0.726108
 
 [node name="StarBase" type="Node2D" parent="AnimatedSprite2D" index="0"]
-position = Vector2(4, -6)
+position = Vector2(4, -4)
 
 [node name="Star" type="Sprite2D" parent="AnimatedSprite2D/StarBase" index="0"]
 visible = false
@@ -154,8 +157,26 @@ texture = ExtResource("6_3i8es")
 [node name="HitBox" type="Area2D" parent="AnimatedSprite2D/StarBase/Star" index="0"]
 collision_layer = 4
 collision_mask = 3
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/StarBase/Star/HitBox" index="0"]
-shape = SubResource("RectangleShape2D_6s22m")
+shape = SubResource("CircleShape2D_l5s2m")
+
+[node name="Reaction" parent="." index="4"]
+frame_progress = 0.0
+
+[node name="Throw" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource("7_xt5fa")
+bus = &"sound"
+
+[node name="Appear" type="AudioStreamPlayer2D" parent="." index="6"]
+stream = ExtResource("8_w0aei")
+pitch_scale = 1.3
+bus = &"sound"
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("9_303qo")
+bus = &"sound"
 
 [connection signal="area_entered" from="AnimatedSprite2D/StarBase/Star/HitBox" to="." method="_on_hurt_box_area_entered"]

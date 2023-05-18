@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dust7rpvliu7w"]
+[gd_scene load_steps=5 format=3 uid="uid://dust7rpvliu7w"]
 
 [ext_resource type="Script" path="res://sword.gd" id="1_bbeay"]
 [ext_resource type="PackedScene" uid="uid://b08jcqdss0275" path="res://item.tscn" id="1_k08vh"]
 [ext_resource type="Texture2D" uid="uid://bdp4mnxyd7n4t" path="res://assets/ninja/Items/Weapons/Katana/Sprite.png" id="2_knpr1"]
+[ext_resource type="AudioStream" uid="uid://bttx0ilnlk5hw" path="res://assets/ninja/Sounds/Game/Sword.wav" id="4_i8fmq"]
 
 [node name="Sword" instance=ExtResource("1_k08vh")]
 script = ExtResource("1_bbeay")
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_knpr1")
+
+[node name="Collect" type="AudioStreamPlayer2D" parent="." index="2"]
+stream = ExtResource("4_i8fmq")
+bus = &"sound"

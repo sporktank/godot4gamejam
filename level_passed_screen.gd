@@ -27,10 +27,30 @@ func animate_appearance() -> void:
 	kills_label.text = "KILLS: %d" % num_kills
 	moves_label.text = "MOVES: %d" % num_moves
 	sushi_label.text = "SUSHI: %d" % num_sushi
-	tween.tween_property(kills_label, "position:x", 0.0, 0.2).set_delay(0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(moves_label, "position:x", 0.0, 0.2).set_delay(0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(sushi_label, "position:x", 0.0, 0.2).set_delay(0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	
+	tween.tween_property(kills_label, "position:x", 0.0, 0.2).set_delay(0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback($Appear1.play)
+	
+	tween.tween_property(moves_label, "position:x", 0.0, 0.2).set_delay(0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback($Appear2.play)
+	
+	tween.tween_property(sushi_label, "position:x", 0.0, 0.2).set_delay(0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback($Appear3.play)
 	
 	await tween.finished
 	continue_button.disabled = false
 	continue_button.grab_focus()
+
+
+func _on_continue_button_focus_entered() -> void:
+	$Focus.play()
+
+
+func _on_continue_button_button_down() -> void:
+	if $Focus.playing:
+		$Focus.stop()
+	$Click.play()
+
+
+func _on_continue_button_mouse_entered() -> void:
+	$Focus.play()

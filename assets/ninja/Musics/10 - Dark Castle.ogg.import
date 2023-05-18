@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/10 - Dark Castle.ogg-a026e7f9d7b5257249bd5d85
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

@@ -19,6 +19,8 @@ const TILE_SIZE_F := float(TILE_SIZE_I)
 
 var _hack_can_reload := 0
 
+var levels_completed: Array[String] = []  # Hacky / towards end of gamejam stuff!
+
 
 func direction_to_string(direction: Vector2i) -> String:
 	match direction.clamp(Vector2i(-1, -1), Vector2i(1, 1)):

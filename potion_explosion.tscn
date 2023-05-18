@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://xwwg24bmp0he"]
+[gd_scene load_steps=12 format=3 uid="uid://xwwg24bmp0he"]
 
 [ext_resource type="Texture2D" uid="uid://jl4khcfucir5" path="res://assets/ninja/Actor/Characters/Shadow.png" id="1_iyshw"]
 [ext_resource type="Script" path="res://potion_explosion.gd" id="1_y4ut6"]
 [ext_resource type="Texture2D" uid="uid://sn4n2pf8a5ls" path="res://assets/ninja/Items/Potion/WaterPot.png" id="2_oho6v"]
 [ext_resource type="Texture2D" uid="uid://jusab07nctai" path="res://assets/ninja/FX/Magic/Circle/SpriteSheetWhite.png" id="3_huljw"]
+[ext_resource type="AudioStream" uid="uid://k5ql6up1v4qy" path="res://assets/ninja/Sounds/Game/Explosion2.wav" id="5_x7oeo"]
+[ext_resource type="AudioStream" uid="uid://cj82hr11bs7w8" path="res://assets/ninja/Sounds/Game/Hit5.wav" id="6_ao8oe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74kwy"]
 atlas = ExtResource("3_huljw")
@@ -60,3 +62,11 @@ scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_myn8o")
 frame = 3
 frame_progress = 1.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_x7oeo")
+bus = &"sound"
+
+[node name="ThrowSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ao8oe")
+bus = &"sound"

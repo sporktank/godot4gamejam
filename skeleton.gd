@@ -8,14 +8,23 @@ const TURN_DURATION := 0.1
 
 
 func move(level: Level) -> void:
-	if is_alive and level.has_connection(get_map_position(), direction * 2):
-		var will_turn := not level.has_connection(get_map_position() + direction * 2, direction * 2)
+	if is_alive:# and level.has_connection(get_map_position(), direction * 2):
+		#var will_turn := not level.has_connection(get_map_position() + direction * 2, direction * 2)
+		var will_turn := false
+		if not level.has_connection(get_map_position() + direction * 2, direction * 2):
+			will_turn = true
+		else:
+			var connection := level.get_connection(get_map_position() + direction * 2, direction * 2)
+			if connection.blocked:
+				will_turn = true
+		# TODO: Refactor above?
 		
 		var will_kill := level.player.get_map_position() == get_map_position() + direction * 2
 		
 		var dir_str := Global.direction_to_string(direction)
 		var opp_dir_str := Global.direction_to_string(-direction)
 		animated_sprite_2d.play("walk_" + dir_str)
+		$Move.play()
 		
 		await create_tween().tween_property(
 			self, "position", position + direction * Global.TILE_SIZE_F * 2, WALK_DURATION - (TURN_DURATION if will_turn else 0.0)
@@ -34,9 +43,7 @@ func move(level: Level) -> void:
 			else:
 				animated_sprite_2d.play("idle_" + dir_str)
 		
-	else:
-		if is_alive:
-			printerr("Skeleton doesn't seem to be able to move from %s facing %s." % [get_map_position(), direction])
+	else: 
 		await get_tree().create_timer(SMALL_PAUSE_TIME).timeout
 	
 	movement_finished.emit()

@@ -82,6 +82,7 @@ func _on_potion_exploded(map_position: Vector2i) -> void:
 		
 		reaction.show()
 		reaction.play("default")
+		$ReactionSound.play()
 		await reaction.animation_finished
 		reaction.hide()
 		

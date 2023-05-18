@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://doye7aod8wnpc"]
+[gd_scene load_steps=5 format=3 uid="uid://doye7aod8wnpc"]
 
 [ext_resource type="PackedScene" uid="uid://b08jcqdss0275" path="res://item.tscn" id="1_h8bey"]
 [ext_resource type="Texture2D" uid="uid://cy5kqilcq8pku" path="res://assets/ninja/Items/Food/SushiCombined.png" id="2_hrs4t"]
 [ext_resource type="Script" path="res://sushi.gd" id="2_ssoya"]
+[ext_resource type="AudioStream" uid="uid://dc6187i5ptt3w" path="res://assets/ninja/Sounds/Game/PowerUp1.wav" id="4_3v8c8"]
 
 [node name="Sushi" instance=ExtResource("1_h8bey")]
 script = ExtResource("2_ssoya")
@@ -11,3 +12,7 @@ script = ExtResource("2_ssoya")
 rotation = 0.0
 texture = ExtResource("2_hrs4t")
 hframes = 8
+
+[node name="Collect" type="AudioStreamPlayer2D" parent="." index="2"]
+stream = ExtResource("4_3v8c8")
+bus = &"sound"
