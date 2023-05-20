@@ -1,9 +1,10 @@
-[gd_scene load_steps=50 format=3 uid="uid://c2no5vfqvrqom"]
+[gd_scene load_steps=52 format=3 uid="uid://c2no5vfqvrqom"]
 
 [ext_resource type="PackedScene" uid="uid://dje7f680w82yk" path="res://enemy.tscn" id="1_cn6wk"]
 [ext_resource type="Script" path="res://skeleton.gd" id="2_dsjjp"]
 [ext_resource type="Texture2D" uid="uid://drp5twr5eyghl" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Jump.png" id="3_rgdct"]
 [ext_resource type="Texture2D" uid="uid://dgwfaecgaijh4" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Attack.png" id="4_ei88p"]
+[ext_resource type="Texture2D" uid="uid://cbpdndm7rhmp4" path="res://assets/ninja/Actor/Characters/Skeleton/SeparateAnim/Dead.png" id="5_4g8td"]
 [ext_resource type="Texture2D" uid="uid://dmchnthnn50op" path="res://assets/ninja/Actor/Characters/Skeleton/SeparateAnim/Idle.png" id="5_c40sm"]
 [ext_resource type="Texture2D" uid="uid://b2pvgjo0b10b0" path="res://assets/ninja/Actor/Characters/Skeleton/SeparateAnim/Walk.png" id="6_l0r31"]
 [ext_resource type="Texture2D" uid="uid://b7erxf430f2n5" path="res://assets/ninja/Items/Weapons/Bone/Sprite.png" id="7_xfyxw"]
@@ -40,6 +41,10 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_coowf"]
 atlas = ExtResource("4_ei88p")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s8ne"]
+atlas = ExtResource("5_4g8td")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t6luf"]
 atlas = ExtResource("5_c40sm")
@@ -217,6 +222,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4s8ne")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_t6luf")
 }],
 "loop": true,
@@ -259,7 +272,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_down_to_up",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -273,7 +286,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_left_to_right",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -287,7 +300,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_right_to_left",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -301,7 +314,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_up_to_down",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -318,7 +331,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 12.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -335,7 +348,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 12.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -352,7 +365,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 12.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -369,7 +382,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 12.0
+"speed": 5.0
 }]
 
 [node name="Skeleton" instance=ExtResource("1_cn6wk")]
@@ -380,16 +393,18 @@ direction_value = 3
 position = Vector2(0, 0)
 sprite_frames = SubResource("SpriteFrames_arauu")
 animation = &"idle_right"
-frame_progress = 0.470975
+frame_progress = 0.0
 offset = Vector2(0, -8)
 
 [node name="PlayerDieOffset" parent="." index="2"]
-position = Vector2(0, -19)
+position = Vector2(-6, -5)
 
 [node name="Weapon" type="Sprite2D" parent="." index="3"]
-position = Vector2(4.76837e-07, -7)
+visible = false
+position = Vector2(-9, -3)
 texture = ExtResource("7_xfyxw")
-offset = Vector2(0, -6)
+centered = false
+offset = Vector2(0, -12)
 
 [node name="Move" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource("8_ryfu0")

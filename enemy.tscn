@@ -176,7 +176,7 @@ texture = ExtResource("2_nws6r")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_l6r6f")
 animation = &"idle_up"
-frame_progress = 0.410645
+frame_progress = 0.0369058
 
 [node name="PlayerDieOffset" type="Marker2D" parent="."]
 

@@ -33,7 +33,10 @@ func move(level: Level) -> void:
 		attack_direction = -rel / rel.length()
 		star.position = Vector2i.ZERO
 		star.rotation = 0.0
-		star.show() # TODO: Animation.
+		star.show() 
+		animated_sprite_2d.play("idle_" + Global.direction_to_string(attack_direction))
+		hit_box.monitorable = false
+		hit_box.monitoring = false
 		$Appear.play()
 		await get_tree().create_timer(SMALL_PAUSE_TIME).timeout
 	
@@ -48,6 +51,14 @@ func throw_star() -> void:
 	hit_box.monitoring = false
 	throwing = true
 	$Throw.play()
+
+
+func die() -> void:
+	super()
+	hit_box.monitorable = false
+	hit_box.monitoring = false
+	star.hide()
+	animated_sprite_2d.position.y += 2
 
 
 func _process(delta: float) -> void:

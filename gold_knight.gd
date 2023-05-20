@@ -3,6 +3,16 @@ class_name GoldKnight
 extends Enemy
 
 
+@onready var weapon: Sprite2D = $AnimatedSprite2D/Weapon
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+
+func _play_idle_animation() -> void:
+	super()
+	if animation_player:
+		animation_player.play("idle_" + Global.direction_to_string(direction))
+
+
 func move(level: Level) -> void:
 	if not is_alive or just_reacted:
 		await get_tree().create_timer(SMALL_PAUSE_TIME).timeout
@@ -16,17 +26,26 @@ func move(level: Level) -> void:
 			
 			# TODO: Animate sword.
 			
-			animated_sprite_2d.play("idle_down")
+			animated_sprite_2d.play("kill")
+			animation_player.play("kill")
 			level.player.die(player_die_offset.position)
 			
 		else:
 			var dir_str := Global.direction_to_string(direction)
 			var opp_dir_str := Global.direction_to_string(-direction)
 			
+			weapon.hide()
+			animation_player.play("idle_" + opp_dir_str)
 			animated_sprite_2d.play("turn_from_%s_to_%s" % [dir_str, opp_dir_str])
 			$Move.play()
 			await animated_sprite_2d.animation_finished
+			weapon.show()
 			direction *= -1
 	
 	movement_finished.emit()
+
+
+func die() -> void:
+	super()
+	weapon.hide()
  

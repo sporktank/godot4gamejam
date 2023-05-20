@@ -28,6 +28,8 @@ var direction: Vector2i:
 			Vector2i.LEFT: direction_value = Global.Direction.LEFT
 			Vector2i.RIGHT: direction_value = Global.Direction.RIGHT
 
+
+@onready var shadow: Sprite2D = $Shadow
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_die_offset: Marker2D = $PlayerDieOffset
 @onready var hurt_box: Area2D = $HurtBox
@@ -64,8 +66,15 @@ func move(_level: Level) -> void:
 
 func die() -> void:
 	is_alive = false
+	shadow.hide()
 	animated_sprite_2d.play("die")
 	hurt_box.queue_free()
+	
+	# TODO: This looks aweful!
+	var blood := preload("res://blood.tscn").instantiate() as GPUParticles2D
+	blood.emitting = true
+	blood.position = Vector2(0, -7)
+	add_child(blood)
 
 
 func _on_hurt_box_area_entered(_area: Area2D) -> void:

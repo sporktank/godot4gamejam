@@ -5,3 +5,6 @@
 [node name="Game" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_1kjdi")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 96)

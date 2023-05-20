@@ -8,6 +8,7 @@ script = ExtResource("1_dwh6h")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.75)
+self_modulate = Color(0, 0, 0, 1)
 texture = ExtResource("2_ho8wq")
 region_enabled = true
 region_rect = Rect2(2, 2, 8, 2)

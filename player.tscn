@@ -1,14 +1,17 @@
-[gd_scene load_steps=39 format=3 uid="uid://bbj8x6up5qx4r"]
+[gd_scene load_steps=49 format=3 uid="uid://bbj8x6up5qx4r"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_0dwoh"]
+[ext_resource type="FontFile" uid="uid://catldy6ebh5mn" path="res://assets/ninja/HUD/Font/NormalFont.ttf" id="2_cxa6p"]
 [ext_resource type="Texture2D" uid="uid://jl4khcfucir5" path="res://assets/ninja/Actor/Characters/Shadow.png" id="2_p8ipd"]
 [ext_resource type="Texture2D" uid="uid://bbskdlu0swqa7" path="res://assets/ninja/Actor/Characters/DarkNinja/SeparateAnim/Dead.png" id="3_7c0pk"]
+[ext_resource type="AudioStream" uid="uid://5h8prnjhua8c" path="res://assets/ninja/Sounds/Game/Success2.wav" id="3_hhiwy"]
 [ext_resource type="Texture2D" uid="uid://bkmfkg745rm53" path="res://assets/ninja/Actor/Characters/DarkNinja/SeparateAnim/Idle.png" id="3_owqp7"]
 [ext_resource type="Texture2D" uid="uid://cpqu7ccbmfnt1" path="res://assets/ninja/Actor/Characters/DarkNinja/SeparateAnim/Walk.png" id="4_l6pgq"]
 [ext_resource type="Texture2D" uid="uid://c48lt3ros68hm" path="res://assets/ninja/Actor/Characters/DarkNinja/SeparateAnim/Special2.png" id="6_8ykgi"]
 [ext_resource type="Texture2D" uid="uid://m527deom1b3q" path="res://assets/ninja/Items/Weapons/Katana/SpriteInHand.png" id="7_pxbjo"]
 [ext_resource type="Texture2D" uid="uid://dtdvs2pi4h8sr" path="res://assets/move_hint.png" id="8_0op0t"]
 [ext_resource type="Texture2D" uid="uid://civnv1tctgv6h" path="res://assets/ninja/Items/Weapons/Bow2/Arrow.png" id="8_gqy1o"]
+[ext_resource type="Texture2D" uid="uid://btije6g21y5hu" path="res://assets/ninja/Actor/Characters/DarkNinja/SeparateAnim/Special1.png" id="8_he0fs"]
 [ext_resource type="Texture2D" uid="uid://sn4n2pf8a5ls" path="res://assets/ninja/Items/Potion/WaterPot.png" id="9_xo0ip"]
 [ext_resource type="AudioStream" uid="uid://gw6msd13nogk" path="res://assets/ninja/Sounds/Game/Success3.wav" id="10_q5n0g"]
 [ext_resource type="AudioStream" uid="uid://ccfb7wi7cexq5" path="res://assets/ninja/Sounds/Game/Sword2.wav" id="11_oykc1"]
@@ -98,6 +101,10 @@ region = Rect2(16, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mcxmo"]
 atlas = ExtResource("4_l6pgq")
 region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hi0m"]
+atlas = ExtResource("8_he0fs")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k63wl"]
 atlas = ExtResource("6_8ykgi")
@@ -215,19 +222,265 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_v6qyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hi0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k63wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hi0m")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_k63wl")
 }],
 "loop": false,
 "name": &"win",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_etfhu"]
 size = Vector2(12, 12)
 
+[sub_resource type="Animation" id="Animation_wmu8a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/Sword:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_evtpk"]
+resource_name = "idle_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/Sword:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_d4ivj"]
+resource_name = "idle_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, -13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/Sword:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ok2rc"]
+resource_name = "idle_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(9, -9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/Sword:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_p5gfh"]
+resource_name = "idle_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/Sword:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtcqh"]
+_data = {
+"RESET": SubResource("Animation_wmu8a"),
+"idle_down": SubResource("Animation_evtpk"),
+"idle_left": SubResource("Animation_d4ivj"),
+"idle_right": SubResource("Animation_ok2rc"),
+"idle_up": SubResource("Animation_p5gfh")
+}
+
 [node name="Player" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_0dwoh")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Restart" type="Label" parent="HUD"]
+visible = false
+anchors_preset = -1
+anchor_top = -0.015625
+anchor_right = 0.675
+anchor_bottom = -0.015625
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_cxa6p")
+theme_override_font_sizes/font_size = 9
+text = "RESTART = R"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RestartSound" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource("3_hhiwy")
+bus = &"sound"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = ExtResource("2_p8ipd")
@@ -235,15 +488,19 @@ texture = ExtResource("2_p8ipd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 8)
 sprite_frames = SubResource("SpriteFrames_6danx")
-animation = &"idle_down"
+animation = &"win"
+frame = 4
+frame_progress = 1.0
 offset = Vector2(0, -16)
 
-[node name="Sword" type="Sprite2D" parent="."]
+[node name="Sword" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false
 position = Vector2(-5, 4)
+rotation = 1.5708
 texture = ExtResource("7_pxbjo")
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -254,21 +511,25 @@ shape = SubResource("RectangleShape2D_etfhu")
 position = Vector2(0, -3)
 
 [node name="up" type="Sprite2D" parent="MoveHints"]
+visible = false
 position = Vector2(0, -8)
 rotation = -1.5708
 texture = ExtResource("8_0op0t")
 
 [node name="down" type="Sprite2D" parent="MoveHints"]
+visible = false
 position = Vector2(0, 9)
 rotation = 1.5708
 texture = ExtResource("8_0op0t")
 
 [node name="left" type="Sprite2D" parent="MoveHints"]
+visible = false
 position = Vector2(-8, 0)
 rotation = 3.14159
 texture = ExtResource("8_0op0t")
 
 [node name="right" type="Sprite2D" parent="MoveHints"]
+visible = false
 position = Vector2(8, 0)
 texture = ExtResource("8_0op0t")
 
@@ -334,5 +595,10 @@ volume_db = -25.0
 pitch_scale = 0.9
 attenuation = 4.0
 bus = &"sound"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qtcqh")
+}
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

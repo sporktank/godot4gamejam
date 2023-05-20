@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdip164cp4jrc"]
+[gd_scene load_steps=26 format=3 uid="uid://bdip164cp4jrc"]
 
 [ext_resource type="PackedScene" uid="uid://dje7f680w82yk" path="res://enemy.tscn" id="1_3octw"]
 [ext_resource type="Script" path="res://blue_ninja.gd" id="2_be34f"]
 [ext_resource type="Texture2D" uid="uid://drp5twr5eyghl" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Jump.png" id="2_v4w7i"]
 [ext_resource type="Texture2D" uid="uid://dgwfaecgaijh4" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Attack.png" id="3_1j5qy"]
 [ext_resource type="Texture2D" uid="uid://dt3whfk5noyfa" path="res://assets/ninja/Actor/Characters/BlueNinja/SeparateAnim/Idle.png" id="4_glmke"]
+[ext_resource type="Texture2D" uid="uid://dd7hcbadapwgn" path="res://assets/ninja/Actor/Characters/BlueNinja/SeparateAnim/Dead.png" id="5_dleqt"]
 [ext_resource type="Texture2D" uid="uid://b55ol26gl07qs" path="res://assets/ninja/HUD/Shuriken.png" id="6_3i8es"]
 [ext_resource type="AudioStream" uid="uid://bfgovv2d8xhg1" path="res://assets/ninja/Sounds/Game/Hit6.wav" id="7_xt5fa"]
 [ext_resource type="AudioStream" uid="uid://bttx0ilnlk5hw" path="res://assets/ninja/Sounds/Game/Sword.wav" id="8_w0aei"]
@@ -42,6 +43,10 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("3_1j5qy")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8w5v"]
+atlas = ExtResource("5_dleqt")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wfx5h"]
 atlas = ExtResource("4_glmke")
 region = Rect2(0, 0, 16, 16)
@@ -54,9 +59,9 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("4_glmke")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ubv2o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kam2a"]
 atlas = ExtResource("4_glmke")
-region = Rect2(48, 0, 16, 16)
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aj4vd"]
 animations = [{
@@ -106,6 +111,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_m8w5v")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wfx5h")
 }],
 "loop": true,
@@ -130,7 +143,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ubv2o")
+"texture": SubResource("AtlasTexture_kam2a")
 }],
 "loop": true,
 "name": &"idle_up",
@@ -145,7 +158,8 @@ script = ExtResource("2_be34f")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_aj4vd")
-frame_progress = 0.726108
+animation = &"die"
+frame_progress = 0.0
 
 [node name="StarBase" type="Node2D" parent="AnimatedSprite2D" index="0"]
 position = Vector2(4, -4)

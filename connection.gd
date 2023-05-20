@@ -7,6 +7,7 @@ var blocked := false
 
 @onready var node_a: Node2D = $A
 @onready var node_b: Node2D = $B
+@onready var appear: AudioStreamPlayer2D = $Appear
 
 
 func get_map_position_a() -> Vector2i:

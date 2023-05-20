@@ -201,3 +201,26 @@ func get_num_enemies_reacting() -> int:
 		if enemy.reacting:
 			count += 1
 	return count
+
+
+func hide_connections() -> void:
+	for child in $Connections.get_children():
+		var connection := child as Connection
+		connection.hide()
+
+
+func animate_connections() -> void:
+	var tween := create_tween().set_parallel(true)
+	
+	for child in $Connections.get_children():
+		var connection := child as Connection
+		
+		connection.modulate.a = 0.0
+		connection.show()
+		
+		var distance := player.global_position.distance_to(connection.global_position)
+		var delay := distance / 32.0 * 0.1
+		tween.tween_property(connection, "modulate:a", 1.0, 0.2).set_delay(delay)
+		tween.tween_callback(connection.appear.play).set_delay(delay)
+	
+	await tween.finished

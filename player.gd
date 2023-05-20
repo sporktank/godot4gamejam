@@ -21,7 +21,7 @@ var potion_explosion: PotionExplosion = null
 
 @onready var shadow: Sprite2D = $Shadow
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var sword: Sprite2D = $Sword
+@onready var sword: Sprite2D = $AnimatedSprite2D/Sword
 @onready var arrow_hints: Node2D = $ArrowHints
 @onready var potion_hints: Node2D = $PotionHints
 @onready var move_hints: Node2D = $MoveHints
@@ -29,10 +29,14 @@ var potion_explosion: PotionExplosion = null
 @onready var move_hints_down: Sprite2D = $MoveHints/down
 @onready var move_hints_left: Sprite2D = $MoveHints/left
 @onready var move_hints_right: Sprite2D = $MoveHints/right
+@onready var restart: Label = $HUD/Restart
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	animated_sprite_2d.play("idle_down")
+	animation_player.play("idle_down")
+	sword.hide()
 
 
 func get_map_position() -> Vector2i:
@@ -45,6 +49,7 @@ func move(direction: Vector2i, movement_type: Global.MovementType = Global.Movem
 	
 	var dir_str := Global.direction_to_string(direction)
 	animated_sprite_2d.play("walk_" + dir_str)
+	animation_player.play("idle_" + dir_str)
 	
 	$Audio/Move.pitch_scale = randf_range(0.87, 0.92)
 	$Audio/Move.play()
@@ -59,26 +64,39 @@ func move(direction: Vector2i, movement_type: Global.MovementType = Global.Movem
 		attacked_position.emit(get_map_position())
 	
 	animated_sprite_2d.play("idle_" + dir_str)
+	animation_player.play("idle_" + dir_str)
 	finished_moving.emit()
+
+
+func show_restart() -> void:
+	if not restart.visible:
+		restart.show()
+		$HUD/RestartSound.play()
 
 
 func die(offset: Vector2) -> void:
 	can_move = false
 	
+	show_restart()
 	shadow.hide()
 	sword.hide()
 	animated_sprite_2d.play("dead")
 	$Audio/Die.play()
-	create_tween().tween_property(animated_sprite_2d, "position", offset + Vector2(0, -2), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	create_tween().tween_property(self, "position:y", position.y + 2, 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	# TODO: Particle effects.
+	#create_tween().tween_property(animated_sprite_2d, "position", offset + Vector2(0, 0), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	#create_tween().tween_property(self, "position:y", position.y + 0, 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	create_tween().tween_property(animated_sprite_2d, "position", offset, 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	animated_sprite_2d.z_index = 1
+	var blood := preload("res://blood.tscn").instantiate() as GPUParticles2D
+	blood.emitting = true
+	blood.position = offset + Vector2(0, -7)
+	add_child(blood)
 
 
 func win() -> void:
 	can_move = false
 	animated_sprite_2d.play("win")
+	sword.hide()
 	$Audio/Win.play()
-	# TODO: Particle effects?
 	
 	await animated_sprite_2d.animation_finished
 

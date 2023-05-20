@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://nyc6kq0fvhyj"]
+[gd_scene load_steps=10 format=3 uid="uid://nyc6kq0fvhyj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ifthl"]
 [ext_resource type="AudioStream" uid="uid://lv25bn14ocru" path="res://assets/ninja/Musics/5 - Peaceful.ogg" id="2_q43ma"]
+[ext_resource type="Shader" path="res://vignette.gdshader" id="2_vu5ot"]
 [ext_resource type="AudioStream" uid="uid://c84jupyekbhjr" path="res://assets/ninja/Musics/16 - Melancholia.ogg" id="3_huq2m"]
 [ext_resource type="AudioStream" uid="uid://cclwjy1afe0kr" path="res://assets/ninja/Musics/23 - Road.ogg" id="4_nw5cq"]
 [ext_resource type="AudioStream" uid="uid://bigwp75u5iwkw" path="res://assets/ninja/Musics/10 - Dark Castle.ogg" id="5_5dfhl"]
+[ext_resource type="Texture2D" uid="uid://b2nlbnu4oyogo" path="res://screenshots/game.png" id="7_j5v23"]
+[ext_resource type="Texture2D" uid="uid://dk4sa73g7np6v" path="res://screenshots/menu.png" id="8_fs0db"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3l2g"]
+shader = ExtResource("2_vu5ot")
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+shader_parameter/width = 0.062
+shader_parameter/maximum = 0.565
+shader_parameter/exponent = 0.378
+shader_parameter/steps = 256
 
 [node name="Main" type="Node"]
 process_mode = 3
@@ -12,6 +23,12 @@ script = ExtResource("1_ifthl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
+
+[node name="Vignette" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_u3l2g")
+offset_right = 320.0
+offset_bottom = 192.0
+mouse_filter = 2
 
 [node name="Overlay" type="ColorRect" parent="CanvasLayer"]
 offset_right = 320.0
@@ -36,3 +53,15 @@ bus = &"music"
 [node name="Dungeon" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("5_5dfhl")
 bus = &"music"
+
+[node name="Game" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(160, 96)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_j5v23")
+
+[node name="Menu" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(160, 296)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_fs0db")

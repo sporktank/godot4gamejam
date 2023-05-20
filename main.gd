@@ -22,7 +22,7 @@ func _ready() -> void:
 	load_scene(MENU_SCENE)
 
 
-func load_scene(scene: PackedScene, level_name := "") -> void:
+func load_scene(scene: PackedScene, level_name := "", do_camera_intro := true) -> void:
 	if _loading:
 		return
 	
@@ -45,6 +45,7 @@ func load_scene(scene: PackedScene, level_name := "") -> void:
 	current_scene = scene.instantiate()
 	if level_name:  # This is a bit hacky?!
 		current_scene.load_level(level_name)
+		current_scene.do_camera_intro = do_camera_intro
 	add_child(current_scene)
 	
 	if level_name.begins_with("woods"):
@@ -62,6 +63,7 @@ func load_scene(scene: PackedScene, level_name := "") -> void:
 		current_music.volume_db = FADE_VOLUME_DB
 		current_music.play()
 	
+	get_tree().paused = false
 	create_tween().tween_property(current_music, "volume_db", FULL_VOLUME_DB, TRANSITION_HALF_TIME)
 	
 	await create_tween().tween_property(
@@ -69,7 +71,7 @@ func load_scene(scene: PackedScene, level_name := "") -> void:
 		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).finished
 	
 	_loading = false
-	get_tree().paused = false
+	#get_tree().paused = false
 
 
 func _on_level_selected(level_name: String) -> void:
@@ -93,3 +95,17 @@ func _on_level_passed(level_name: String) -> void:
 		"dungeon_2": next_level_name = "dungeon_3"
 	
 	load_scene(GAME_SCENE if next_level_name != "" else MENU_SCENE, next_level_name)
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("quit"):
+		if not is_instance_valid(current_scene):
+			get_tree().quit()
+		elif current_scene is Menu:
+			get_tree().quit()
+		elif current_scene is Game:
+			load_scene(MENU_SCENE)
+	
+	elif Input.is_action_just_pressed("restart"):
+		if current_scene is Game:
+			load_scene(GAME_SCENE, (current_scene as Game).level.level_name, false)
