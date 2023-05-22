@@ -11,12 +11,12 @@ const WALK_DURATION := 0.25
 
 func move(level: Level) -> void:
 	if is_alive:# and level.has_connection(get_map_position(), direction * 2):
-		# Need to handle case where cannot move after reacting to face explosion.
+		# Need to handle case where cannot move after reacting to face explosion, or cannot move at all.
 		var will_move := true
 		var turn_first := false
-		if not level.has_connection(get_map_position(), direction * 2):
+		if not level.has_connection(get_map_position(), direction * 2) or level.get_connection(get_map_position(), direction * 2).blocked:
 			turn_first = true
-			if not level.has_connection(get_map_position(), -direction * 2):
+			if not level.has_connection(get_map_position(), -direction * 2) or level.get_connection(get_map_position(), -direction * 2).blocked:
 				will_move = false
 		
 		var dir_str := Global.direction_to_string(direction)
@@ -38,7 +38,7 @@ func move(level: Level) -> void:
 				will_turn = true
 		# TODO: Refactor above?
 		
-		var will_kill := level.player.get_map_position() == get_map_position() + direction * 2
+		var will_kill := level.player.get_map_position() == get_map_position() + direction * 2 and level.has_connection(get_map_position(), direction * 2) and not level.get_connection(get_map_position(), direction * 2).blocked
 		
 		dir_str = Global.direction_to_string(direction)
 		opp_dir_str = Global.direction_to_string(-direction)
@@ -56,7 +56,7 @@ func move(level: Level) -> void:
 			weapon.show()
 		
 		else:
-			if will_turn:
+			if will_turn and not (turn_first and not will_move):
 				animated_sprite_2d.play("turn_from_%s_to_%s" % [dir_str, opp_dir_str])
 				#await animated_sprite_2d.animation_finished
 				direction *= -1

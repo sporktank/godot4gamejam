@@ -75,7 +75,7 @@ func load_scene(scene: PackedScene, level_name := "", do_camera_intro := true) -
 
 
 func _on_level_selected(level_name: String) -> void:
-	load_scene(GAME_SCENE, level_name)
+	load_scene(GAME_SCENE, level_name, level_name.ends_with("1"))
 
 
 func _on_level_passed(level_name: String) -> void:
@@ -94,7 +94,7 @@ func _on_level_passed(level_name: String) -> void:
 		"dungeon_1": next_level_name = "dungeon_2"
 		"dungeon_2": next_level_name = "dungeon_3"
 	
-	load_scene(GAME_SCENE if next_level_name != "" else MENU_SCENE, next_level_name)
+	load_scene(GAME_SCENE if next_level_name != "" else MENU_SCENE, next_level_name, next_level_name.ends_with("1"))
 
 
 func _process(_delta: float) -> void:

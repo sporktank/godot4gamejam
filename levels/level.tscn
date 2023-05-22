@@ -3566,3 +3566,4 @@ y_sort_enabled = true
 position = Vector2(16, 16)
 
 [connection signal="attacked_position" from="Player" to="." method="_on_player_attacked_position"]
+[connection signal="attacking_position" from="Player" to="." method="_on_player_attacking_position"]

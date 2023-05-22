@@ -194,6 +194,14 @@ func _on_player_attacked_position(map_position: Vector2i) -> void:
 			player.kill_count += 1
 
 
+func _on_player_attacking_position(map_position: Vector2i) -> void:
+	for child in enemies.get_children():
+		var enemy: Enemy = (child as Enemy)
+		
+		if enemy.get_map_position() == map_position:
+			create_tween().tween_callback(enemy.bleed).set_delay(player.MOVE_DURATION * 0.4)
+
+
 func get_num_enemies_reacting() -> int:
 	var count := 0
 	for child in enemies.get_children():

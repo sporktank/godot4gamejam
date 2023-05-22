@@ -48,7 +48,8 @@ func _ready() -> void:
 
 
 func get_map_position() -> Vector2i:
-	return (position / Global.TILE_SIZE_I).floor()
+	#return (position / Global.TILE_SIZE_I).floor()
+	return (global_position / Global.TILE_SIZE_I).floor()
 
 
 func update_editor() -> void:
@@ -69,8 +70,10 @@ func die() -> void:
 	shadow.hide()
 	animated_sprite_2d.play("die")
 	hurt_box.queue_free()
-	
-	# TODO: This looks aweful!
+	#bleed()  # Timing doesn't look right to do it here.
+
+
+func bleed() -> void:
 	var blood := preload("res://blood.tscn").instantiate() as GPUParticles2D
 	blood.emitting = true
 	blood.position = Vector2(0, -7)
@@ -78,6 +81,8 @@ func die() -> void:
 
 
 func _on_hurt_box_area_entered(_area: Area2D) -> void:
+	bleed()
+	$Attack.play()
 	die()
 
 

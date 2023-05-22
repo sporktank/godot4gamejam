@@ -272,7 +272,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_down_to_up",
-"speed": 3.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -286,7 +286,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_left_to_right",
-"speed": 3.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -300,7 +300,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_right_to_left",
-"speed": 3.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -314,7 +314,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_from_up_to_down",
-"speed": 3.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -392,7 +392,7 @@ direction_value = 3
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, 0)
 sprite_frames = SubResource("SpriteFrames_arauu")
-animation = &"idle_right"
+animation = &"turn_from_up_to_down"
 frame_progress = 0.0
 offset = Vector2(0, -8)
 

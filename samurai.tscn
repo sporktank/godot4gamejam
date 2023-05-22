@@ -405,7 +405,7 @@ script = ExtResource("1_tkhtu")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, 0)
 sprite_frames = SubResource("SpriteFrames_nsqwp")
-frame_progress = 0.508571
+frame_progress = 0.980505
 offset = Vector2(0, -8)
 
 [node name="Sword" type="Sprite2D" parent="AnimatedSprite2D" index="0"]

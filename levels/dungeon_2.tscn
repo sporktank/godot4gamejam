@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://xd75csh4xyrv"]
+[gd_scene load_steps=10 format=3 uid="uid://xd75csh4xyrv"]
 
 [ext_resource type="PackedScene" uid="uid://dsrhfmdy8yobn" path="res://levels/level.tscn" id="1_1yrgt"]
 [ext_resource type="PackedScene" uid="uid://bfl0ffmtmcm5v" path="res://connection.tscn" id="2_3n2ba"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://buda4dreo1jpj" path="res://key.tscn" id="6_bxu1u"]
 [ext_resource type="PackedScene" uid="uid://dust7rpvliu7w" path="res://sword.tscn" id="7_2oyjc"]
 [ext_resource type="AudioStream" uid="uid://hndq3hqqsk74" path="res://assets/ninja/Sounds/Game/Secret1.wav" id="7_mrbr1"]
+[ext_resource type="PackedScene" uid="uid://doye7aod8wnpc" path="res://sushi.tscn" id="9_sb0jt"]
 
 [node name="Level" instance=ExtResource("1_1yrgt")]
 
@@ -140,8 +141,15 @@ position = Vector2(216, 56)
 [node name="Sword" parent="Items" index="2" instance=ExtResource("7_2oyjc")]
 position = Vector2(152, 152)
 
+[node name="Sushi" parent="Items" index="3" instance=ExtResource("9_sb0jt")]
+position = Vector2(216, 120)
+
+[node name="Sprite2D" parent="Items/Sushi" index="1"]
+frame = 2
+
 [node name="Player" parent="." index="6"]
 position = Vector2(152, 184)
 
 [editable path="Connections/Door"]
 [editable path="Items/Key"]
+[editable path="Items/Sushi"]

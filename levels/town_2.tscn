@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw0lgd0n1fxum"]
+[gd_scene load_steps=6 format=3 uid="uid://dw0lgd0n1fxum"]
 
 [ext_resource type="PackedScene" uid="uid://dsrhfmdy8yobn" path="res://levels/level.tscn" id="1_46e5b"]
 [ext_resource type="PackedScene" uid="uid://bfl0ffmtmcm5v" path="res://connection.tscn" id="2_qrqq7"]
 [ext_resource type="PackedScene" uid="uid://bdip164cp4jrc" path="res://blue_ninja.tscn" id="3_jqf0s"]
+[ext_resource type="PackedScene" uid="uid://doye7aod8wnpc" path="res://sushi.tscn" id="5_jthlm"]
 [ext_resource type="PackedScene" uid="uid://dust7rpvliu7w" path="res://sword.tscn" id="5_n21r3"]
 
 [node name="Level" instance=ExtResource("1_46e5b")]
@@ -102,7 +103,10 @@ position = Vector2(280, 72)
 position = Vector2(24, 104)
 
 [node name="Sword" parent="Items" index="0" instance=ExtResource("5_n21r3")]
-position = Vector2(24, 32)
+position = Vector2(24, 40)
+
+[node name="Sushi" parent="Items" index="1" instance=ExtResource("5_jthlm")]
+position = Vector2(152, 136)
 
 [node name="Player" parent="." index="6"]
 position = Vector2(88, 40)

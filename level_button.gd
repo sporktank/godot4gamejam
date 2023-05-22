@@ -3,8 +3,11 @@ extends Button
 
 func _ready() -> void:
 	if name in Global.levels_completed:
-		add_theme_constant_override("outline_size", 6)
-		add_theme_color_override("font_outline_color", Color.BLACK)
+		add_theme_constant_override("outline_size", 4)
+		add_theme_color_override("font_color", Color.BLACK)
+		add_theme_color_override("font_focus_color", Color.BLACK)
+		add_theme_color_override("font_hover_color", Color.BLACK)
+		add_theme_color_override("font_outline_color", Color("cce322"))
 
 
 func _on_focus_entered() -> void:

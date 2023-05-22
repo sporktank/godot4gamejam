@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dje7f680w82yk"]
+[gd_scene load_steps=26 format=3 uid="uid://dje7f680w82yk"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_glup0"]
 [ext_resource type="Texture2D" uid="uid://jl4khcfucir5" path="res://assets/ninja/Actor/Characters/Shadow.png" id="2_nws6r"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dyyahaecridk7" path="res://assets/ninja/Actor/Characters/Samurai/SeparateAnim/Idle.png" id="5_1jw8c"]
 [ext_resource type="Texture2D" uid="uid://gqd0ms4oh48f" path="res://assets/ninja/HUD/Dialog/DialogInfo.png" id="6_1n7s4"]
 [ext_resource type="AudioStream" uid="uid://cxkhtig2qpjvw" path="res://assets/ninja/Sounds/Game/Alert2.wav" id="7_m75w1"]
+[ext_resource type="AudioStream" uid="uid://b1ceqbc8e8odn" path="res://assets/ninja/Sounds/Game/Hit.wav" id="8_ysbsj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tu1j"]
 atlas = ExtResource("3_j05tw")
@@ -176,7 +177,7 @@ texture = ExtResource("2_nws6r")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_l6r6f")
 animation = &"idle_up"
-frame_progress = 0.0369058
+frame_progress = 0.0864918
 
 [node name="PlayerDieOffset" type="Marker2D" parent="."]
 
@@ -196,6 +197,10 @@ offset = Vector2(0, -24)
 
 [node name="ReactionSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_m75w1")
+bus = &"sound"
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ysbsj")
 bus = &"sound"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

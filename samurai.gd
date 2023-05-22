@@ -8,6 +8,7 @@ extends Enemy
 
 
 func _ready() -> void:
+	super()
 	_play_idle_animation()
 	#if not Engine.is_editor_hint():
 		#var dir_str := Global.direction_to_string(direction)

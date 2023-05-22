@@ -3,7 +3,8 @@ extends Node2D
 
 
 signal finished_moving
-signal attacked_position(map_position: Vector2i)
+signal attacked_position(map_position: Vector2i)  # After attack.
+signal attacking_position(map_position: Vector2i)  # Before attack.
 signal finished_item_interaction
 
 const MOVE_DURATION := 0.4
@@ -53,6 +54,9 @@ func move(direction: Vector2i, movement_type: Global.MovementType = Global.Movem
 	
 	$Audio/Move.pitch_scale = randf_range(0.87, 0.92)
 	$Audio/Move.play()
+	
+	if movement_type == Global.MovementType.ATTACK:
+		attacking_position.emit(get_map_position() + direction)
 	
 	# TODO: Attack animation.
 	await create_tween().tween_property(
@@ -200,4 +204,4 @@ func throw_potion(direction: Vector2i) -> void:
 
 
 func _on_hurt_box_area_entered(_area: Area2D) -> void:
-	die(Vector2i.ZERO)
+	die(Vector2i(0, 7))
