@@ -392,7 +392,7 @@ direction_value = 3
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, 0)
 sprite_frames = SubResource("SpriteFrames_arauu")
-animation = &"turn_from_up_to_down"
+animation = &"idle_right"
 frame_progress = 0.0
 offset = Vector2(0, -8)
 

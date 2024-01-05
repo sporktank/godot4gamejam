@@ -513,7 +513,7 @@ script = ExtResource("2_wxgm0")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_wtua7")
-frame_progress = 0.0
+frame_progress = 0.0063339
 
 [node name="Weapon" type="Sprite2D" parent="AnimatedSprite2D" index="0"]
 position = Vector2(-1.19209e-07, -4)

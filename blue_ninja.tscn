@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bdip164cp4jrc"]
+[gd_scene load_steps=25 format=3 uid="uid://bdip164cp4jrc"]
 
 [ext_resource type="PackedScene" uid="uid://dje7f680w82yk" path="res://enemy.tscn" id="1_3octw"]
 [ext_resource type="Script" path="res://blue_ninja.gd" id="2_be34f"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://b55ol26gl07qs" path="res://assets/ninja/HUD/Shuriken.png" id="6_3i8es"]
 [ext_resource type="AudioStream" uid="uid://bfgovv2d8xhg1" path="res://assets/ninja/Sounds/Game/Hit6.wav" id="7_xt5fa"]
 [ext_resource type="AudioStream" uid="uid://bttx0ilnlk5hw" path="res://assets/ninja/Sounds/Game/Sword.wav" id="8_w0aei"]
-[ext_resource type="AudioStream" uid="uid://b1ceqbc8e8odn" path="res://assets/ninja/Sounds/Game/Hit.wav" id="9_303qo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tu1j"]
 atlas = ExtResource("2_v4w7i")
@@ -190,10 +189,6 @@ bus = &"sound"
 [node name="Appear" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = ExtResource("8_w0aei")
 pitch_scale = 1.3
-bus = &"sound"
-
-[node name="Attack" type="AudioStreamPlayer2D" parent="." index="8"]
-stream = ExtResource("9_303qo")
 bus = &"sound"
 
 [connection signal="area_entered" from="AnimatedSprite2D/StarBase/Star/HitBox" to="." method="_on_hit_box_area_entered"]
